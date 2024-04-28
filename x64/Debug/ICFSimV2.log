@@ -1,0 +1,18 @@
+﻿  DoubleBuffer.cpp
+  Framebuffer.cpp
+C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\include\Constants.h(15,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\include\Constants.h(18,37): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  ICFSimV2.cpp
+C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\include\Constants.h(15,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\include\Constants.h(18,37): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\src\ICFSimV2.cpp(61,22): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\src\ICFSimV2.cpp(177,18): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\src\ICFSimV2.cpp(178,18): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Material.cpp
+  Mesh.cpp
+  Shader.cpp
+  Texture.cpp
+  Uniform.cpp
+  Generating Code...
+  glad.c
+  ICFSimV2.vcxproj -> C:\Users\Nathan\source\repos\ICFSimV2\x64\Debug\ICFSimV2.exe
