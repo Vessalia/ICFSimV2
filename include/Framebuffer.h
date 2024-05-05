@@ -1,6 +1,7 @@
 #pragma once
 #include "Texture.h"
 #include <vector>
+#include <glm/glm.hpp>
 
 class Framebuffer
 {
@@ -14,6 +15,7 @@ public:
     void clear() const;
 
     void copyToBackbuffer() const;
+    void copyToBackbuffer(const glm::vec4& dest) const;
 
     const Texture& getFrameTexture() const;
 

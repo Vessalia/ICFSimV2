@@ -34,12 +34,21 @@ void Framebuffer::use() const
 
 void Framebuffer::clear() const
 {
+    int frameBufferID;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &frameBufferID);
+    glBindFramebuffer(GL_FRAMEBUFFER, ID);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBindFramebuffer(GL_FRAMEBUFFER, frameBufferID);
 }
 
 void Framebuffer::copyToBackbuffer() const
 {
     glBlitNamedFramebuffer(ID, 0, 0, 0, mWidth, mHeight, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+}
+
+void Framebuffer::copyToBackbuffer(const glm::vec4& dest) const
+{
+    glBlitNamedFramebuffer(ID, 0, 0, 0, mWidth, mHeight, dest.x, dest.y, dest.z, dest.w, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 }
 
 const Texture& Framebuffer::getFrameTexture() const

@@ -16,9 +16,7 @@ constexpr float INK_LONGEVITY = 0.997;
 constexpr float VELOCITY_DISSIPATION = 1.f;
 
 constexpr float BRUSH_RADIUS = 0.001;
-constexpr unsigned int JACOBI_ITERATIONS_DIFFUSE = 50;
-constexpr unsigned int JACOBI_ITERATIONS_GRAD = 50;
-constexpr unsigned int JACOBI_ITERATIONS_INK = 20;
+constexpr unsigned int NUM_POISSON_STEPS = 50;
 
 constexpr float VISCOSITY = 0.f;
 constexpr float DX = 1.f;
