@@ -12,6 +12,11 @@
 Uint32 lastUpdateTime = SDL_GetTicks();
 float deltaTime;
 
+bool doImpulse = false;
+bool addInk = false;
+int prevMouseX = 0;
+int prevMouseY = 0;
+
 SDL_GLContext gContext;
 SDL_Window* gWindow = nullptr;
 
@@ -69,6 +74,22 @@ int main()
             if (e.type == SDL_MOUSEMOTION)
             {
                 handleMovement(&e, 1 / 60.f);
+            }
+
+            if (e.type == SDL_KEYDOWN)
+            {
+                if (e.key.keysym.sym == SDLK_LCTRL)
+                {
+                    addInk = true;
+                }
+            }
+            
+            if (e.type == SDL_KEYUP)
+            {
+                if (e.key.keysym.sym == SDLK_LCTRL)
+                {
+                    addInk = false;
+                }
             }
         }
 
@@ -207,10 +228,6 @@ bool init()
     return true;
 }
 
-bool doImpulse = false;
-bool addInk = false;
-int prevMouseX = 0;
-int prevMouseY = 0;
 void handleMovement(SDL_Event* event, float dt)
 {
     int x, y;
@@ -250,33 +267,30 @@ void draw(DoubleBuffer& buffer, Material& material)
 
 void draw(float deltaTime)
 {
+    // Advect
     boundaryMaterial->pushUniform("scale", -1);
     boundaryMaterial->pushUniform("x", velBuffer->getRead().getFrameTexture());
     draw(*velBuffer, *boundaryMaterial);
     velBuffer->swap();
 
-    // Advect
-    glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, -1, "advection step");
+    advectMaterial->pushUniform("u", velBuffer->getRead().getFrameTexture());
     advectMaterial->pushUniform("x", velBuffer->getRead().getFrameTexture());
     advectMaterial->pushUniform("dissipation", VELOCITY_DISSIPATION);
     advectMaterial->pushUniform("dt", deltaTime);
     draw(*velBuffer, *advectMaterial);
     velBuffer->swap();
-    glPopDebugGroup();
 
     boundaryMaterial->pushUniform("scale", 0);
     boundaryMaterial->pushUniform("x", inkBuffer->getRead().getFrameTexture());
     draw(*inkBuffer, *boundaryMaterial);
     inkBuffer->swap();
 
-    // Advect
-    glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, -1, "advection step");
+    advectMaterial->pushUniform("u", velBuffer->getRead().getFrameTexture());
     advectMaterial->pushUniform("x", inkBuffer->getRead().getFrameTexture());
     advectMaterial->pushUniform("dissipation", INK_LONGEVITY);
     advectMaterial->pushUniform("dt", deltaTime);
     draw(*inkBuffer, *advectMaterial);
     inkBuffer->swap();
-    glPopDebugGroup();
 
     // Impulse
     if (doImpulse)
@@ -289,10 +303,9 @@ void draw(float deltaTime)
         if (addInk)
         {
             impulseMaterial->pushUniform("base", inkBuffer->getRead().getFrameTexture());
-            impulseMaterial->pushUniform("color", INK_COLOUR);
+            impulseMaterial->pushUniform("Fdt", INK_COLOUR);
             draw(*inkBuffer, *impulseMaterial);
             inkBuffer->swap();
-            addInk = false;
         }
 
         doImpulse = false;

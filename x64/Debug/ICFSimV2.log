@@ -1,7 +1,0 @@
-﻿  ICFSimV2.cpp
-C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\include\Constants.h(15,38): warning C4305: 'initializing': truncation from 'double' to 'const float'
-C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\include\Constants.h(18,37): warning C4305: 'initializing': truncation from 'double' to 'const float'
-C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\src\ICFSimV2.cpp(80,22): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\src\ICFSimV2.cpp(221,18): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Nathan\source\repos\ICFSimV2\ICFSimV2\src\ICFSimV2.cpp(222,18): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  ICFSimV2.vcxproj -> C:\Users\Nathan\source\repos\ICFSimV2\x64\Debug\ICFSimV2.exe

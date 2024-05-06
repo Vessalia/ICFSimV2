@@ -6,6 +6,7 @@ out vec3 fragColor;
 uniform float rdx;
 uniform float dt;
 uniform float dissipation;
+uniform sampler2D u;
 uniform sampler2D x;
 
 vec3 bilerp(sampler2D map, vec2 pos, vec2 dim)
@@ -30,7 +31,7 @@ vec3 bilerp(sampler2D map, vec2 pos, vec2 dim)
 
 vec3 advect(sampler2D map)
 {
-	vec2 pos = texCoord - dt * rdx * texture(map, texCoord).xy; 
+	vec2 pos = texCoord - dt * rdx * texture(u, texCoord).xy; 
 	vec2 dim = textureSize(map, 0);
 	return dissipation * bilerp(map, pos, dim).rgb;
 }
